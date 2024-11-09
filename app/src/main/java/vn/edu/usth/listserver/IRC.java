@@ -15,7 +15,6 @@ import androidx.appcompat.widget.Toolbar;
 import vn.edu.usth.chatbox.R;
 import vn.edu.usth.createserver.MainActivity;
 import vn.edu.usth.loginsignup.MainActivity2;
-import vn.edu.usth.loginsignup.MainActivity3;
 
 public class IRC extends AppCompatActivity {
     @Override
@@ -30,6 +29,8 @@ public class IRC extends AppCompatActivity {
 //        });
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        String username = getIntent().getStringExtra("username"); //add user name (new change)
+
 
 
 

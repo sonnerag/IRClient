@@ -14,10 +14,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 public class RoomChat extends Fragment {
-
     private ScaleGestureDetector scaleGestureDetector;
     private float currentTextSize;
     private LinearLayout messageContainer;
@@ -32,8 +32,8 @@ public class RoomChat extends Fragment {
         View rootView = inflater.inflate(R.layout.box_chat, container, false);
 
         // Set up views
-        scrollView = rootView.findViewById(R.id.scrollView);
-        messageContainer = rootView.findViewById(R.id.messageContainer);
+//        scrollView = rootView.findViewById(R.id.scrollView);
+//        messageContainer = rootView.findViewById(R.id.messageContainer);
         messageEditText = rootView.findViewById(R.id.messageEditText);
         sendButton = rootView.findViewById(R.id.sendButton);
 
@@ -70,6 +70,17 @@ public class RoomChat extends Fragment {
             updateTextSize(currentTextSize);
             return true;
         }
+    }
+
+    public void addReceivedMessage(String message) {
+        TextView newMessage = new TextView(getContext());
+        newMessage.setText(message);
+        newMessage.setTextSize(TypedValue.COMPLEX_UNIT_PX, currentTextSize);
+        newMessage.setTextColor(ContextCompat.getColor(getContext(),android.R.color.black));
+        newMessage.setPadding(8, 8, 8, 8);
+        messageContainer.addView(newMessage);
+
+        scrollView.post(() -> scrollView.fullScroll(View.FOCUS_DOWN));
     }
 
     // Function to update text size of all TextViews inside the messageContainer (ScrollView)

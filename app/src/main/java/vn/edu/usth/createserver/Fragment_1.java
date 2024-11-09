@@ -3,30 +3,23 @@ package vn.edu.usth.createserver;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.Toast;
-
-
-import android.widget.Button;
-import android.widget.EditText;
-
-
+import vn.edu.usth.chatbox.ChatboxActivity;
 import vn.edu.usth.chatbox.R;
-import vn.edu.usth.listserver.IRC;
-
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Fragment_1#newInstance} factory method to
@@ -74,6 +67,7 @@ public class Fragment_1 extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -97,32 +91,32 @@ public class Fragment_1 extends Fragment {
         return view;
     }
 
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
         Spinner spinner = view.findViewById(R.id.spinner);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.network, android.R.layout.simple_spinner_dropdown_item);
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Use custom spinner item layout for black text on white background
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                getContext(), R.array.network, R.layout.spinner_item
+        );
+        adapter.setDropDownViewResource(R.layout.spinner_item); // Set custom layout for dropdown items
 
         spinner.setAdapter(adapter);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selected_item = parent.getItemAtPosition(position).toString();
-                Toast.makeText(getContext(), "Selected" + selected_item , Toast.LENGTH_SHORT).show();
+                String selectedServer = parent.getItemAtPosition(position).toString();
+                Toast.makeText(getContext(), "Selected server: " + selectedServer, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                // Optional: Handle if needed
             }
         });
-
 
 
 
@@ -142,7 +136,7 @@ public class Fragment_1 extends Fragment {
                     Toast.makeText(getActivity(), "Username saved: " + username, Toast.LENGTH_SHORT).show();
 
                     // Navigate to the IRC activity
-                    Intent intent = new Intent(getActivity(), IRC.class);
+                    Intent intent = new Intent(getActivity(), ChatboxActivity.class);
                     intent.putExtra("username", username);
                     startActivity(intent);
                 } else {

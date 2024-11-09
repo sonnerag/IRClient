@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -12,10 +11,10 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import vn.edu.usth.chatbox.R;
@@ -56,10 +55,16 @@ public class SearchActivity extends AppCompatActivity {
             searchText.setHintTextColor(Color.WHITE);  // Optional: Hint color
         }
 
-        // Customize the SearchView search icon color
-        ImageView searchIcon = searchView.findViewById(androidx.appcompat.R.id.search_button);
-        if (searchIcon != null) {
-            searchIcon.setColorFilter(Color.WHITE);  // Set icon color to WHITE
+        // Access the search icon via reflection and change its color
+        try {
+            Field searchIconField = SearchView.class.getDeclaredField("mSearchButton");
+            searchIconField.setAccessible(true);
+            ImageView searchIcon = (ImageView) searchIconField.get(searchView);
+            if (searchIcon != null) {
+                searchIcon.setColorFilter(Color.WHITE);  // Set icon color to WHITE
+            }
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
         }
 
         // Ensure SearchView is editable
@@ -92,7 +97,7 @@ public class SearchActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         // Load the icon and resize it
-        Drawable backIcon = getResources().getDrawable(R.drawable.back);
+        Drawable backIcon = getResources().getDrawable(R.drawable.back, null);
         backIcon.setBounds(0, 0, 50, 50); // Set the size here (width, height)
 
         // Set the resized icon as navigation icon
@@ -105,5 +110,4 @@ public class SearchActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.toolbar_menubackbutton, menu);
         return true;
     }
-
 }

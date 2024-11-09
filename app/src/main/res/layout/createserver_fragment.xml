@@ -29,8 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="vertical"
-            tools:context=".FragmentServer">
+            android:orientation="vertical">
 
 
             <RelativeLayout
@@ -40,19 +39,13 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp">
 
-                <Spinner
-                    android:layout_marginTop="10dp"
-                    android:id="@+id/spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/server_edit_bg">
-                </Spinner>
-
+                <!-- TextView Label -->
                 <TextView
-                    android:layout_marginLeft="10dp"
+                    android:id="@+id/spinner_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#fff"
+                    android:layout_marginLeft="10dp"
+                    android:background="#FFFFFF"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
                     android:text="Choose a network"
@@ -60,7 +53,18 @@
                     android:textStyle="bold"
                     android:textSize="12sp" />
 
+                <!-- Spinner -->
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/spinner_label"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/server_edit_bg"
+                    android:popupBackground="#FFFFFF" />
             </RelativeLayout>
+
+
 
             <!-- TODO: Update blank fragment layout -->
             <RelativeLayout
@@ -77,7 +81,7 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="20dp"
-                    android:textColor="@color/black"
+                    android:textColor="#000000"
                     android:background="@drawable/server_edit_bg"/>
 
                 <TextView
@@ -109,11 +113,13 @@
                     android:layout_height="60dp">
 
                     <EditText
+                        android:id="@+id/port"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginTop="10dp"
                         android:gravity="center_vertical"
                         android:inputType="number"
+                        android:textColor="@color/black"
                         android:background="@drawable/server_edit_bg"/>
 
                     <TextView
@@ -190,11 +196,13 @@
                         android:layout_marginRight="5dp">
 
                         <EditText
+                            android:id="@+id/nickname"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginTop="10dp"
                             android:gravity="center_vertical"
                             android:paddingLeft="20dp"
+                            android:textColor="@color/black"
                             android:background="@drawable/server_edit_bg"/>
 
                         <TextView
@@ -218,10 +226,12 @@
                         android:layout_marginRight="20dp">
 
                         <EditText
+                            android:id="@+id/realname"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginTop="10dp"
                             android:gravity="center_vertical"
+                            android:textColor="@color/black"
                             android:background="@drawable/server_edit_bg"/>
 
                         <TextView
@@ -267,12 +277,14 @@
                     android:layout_marginRight="20dp">
 
                     <EditText
+                        android:id="@+id/inputchannel"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginTop="10dp"
                         android:gravity="center_vertical"
                         android:paddingLeft="20dp"
-                        android:background="@drawable/server_edit_bg"/>/>
+                        android:textColor="@color/black"
+                        android:background="@drawable/server_edit_bg"/>
 
                     <TextView
                         android:layout_marginLeft="10dp"
@@ -315,12 +327,14 @@
                     android:layout_marginRight="20dp">
 
                     <EditText
+                        android:id="@+id/password"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginTop="10dp"
                         android:gravity="center_vertical"
                         android:inputType="textPassword"
                         android:paddingLeft="20dp"
+                        android:textColor="@color/black"
                         android:background="@drawable/server_edit_bg"/>/>
 
                     <TextView
@@ -347,6 +361,13 @@
                 </RelativeLayout>
             </LinearLayout>
 
+            <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:background="@android:color/darker_gray"/>
+
             <LinearLayout
                 android:layout_marginTop="30dp"
                 android:layout_width="match_parent"
@@ -356,14 +377,14 @@
 
                 <Button
                     android:layout_margin="10dp"
-                android:textAllCaps="false"
-                android:layout_width="130dp"
-                android:layout_height="50dp"
-                android:background="@drawable/bg_edt"
-                android:text="Cancel"
-                android:textColor="#000"
-                android:textSize="15sp"
-                android:textStyle="bold"
+                    android:textAllCaps="false"
+                    android:layout_width="130dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_edt"
+                    android:text="Cancel"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
                     android:layout_weight="1"/>
 
                 <Button
