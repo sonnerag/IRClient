@@ -118,7 +118,7 @@ public class ChatboxActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Cannot send an empty message.", Toast.LENGTH_SHORT).show();
         }
-    }
+    }`
 
 
     // Method to handle received messages
